@@ -3,6 +3,21 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Main {
+
+    public static void createFile(File file, StringBuilder info) {
+        try {
+            if (file.createNewFile())
+                info.append("Файл ").append(file.getName()).append(" создан \n");
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public static void createDir(File dir, StringBuilder info) {
+        if (dir.mkdir())
+            info.append("Каталог ").append(dir.getName()).append(" создан \n");
+    }
+
     public static void main(String[] args) {
 
         File dir1 = new File("C://Users//Games//src");
@@ -24,45 +39,22 @@ public class Main {
 
         StringBuilder info = new StringBuilder();
 
-        if (dir1.mkdir())
-            info.append("Каталог src создан " + "\n");
-        if (dir2.mkdir())
-            info.append("Каталог res создан " + "\n");
-        if (dir3.mkdir())
-            info.append("Каталог savegames создан " + "\n");
-        if (dir4.mkdir())
-            info.append("Каталог temp создан " + "\n");
-        if (dir11.mkdir())
-            info.append("Каталог main создан " + "\n");
-        if (dir12.mkdir())
-            info.append("Катало test создан " + "\n");
+        createDir(dir1,info);
+        createDir(dir2,info);
+        createDir(dir3,info);
+        createDir(dir4,info);
+        createDir(dir11,info);
+        createDir(dir12,info);
 
-        try {
-            if (file1.createNewFile())
-                info.append("Файл Main.java был создан" + "\n");
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-        try {
-            if (file2.createNewFile())
-                info.append("Файл Utils.java был создан" + "\n");
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
 
-        if (dir21.mkdir())
-            info.append("Каталог drawables создан " + "\n");
-        if (dir22.mkdir())
-            info.append("Каталог vectors создан " + "\n");
-        if (dir23.mkdir())
-            info.append("Каталог icons создан " + "\n");
+        createFile(file1,info);
+        createFile(file2,info);
 
-        try {
-            if (file3.createNewFile())
-                info.append("Файл temp.txt был создан");
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
+        createDir(dir21,info);
+        createDir(dir22,info);
+        createDir(dir23,info);
+
+        createFile(file3,info);
 
         try (FileWriter writer = new FileWriter(file3, false)) {
             writer.write(info.toString());
